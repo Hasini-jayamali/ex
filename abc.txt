@@ -236,3 +236,60 @@ const db=admin.firestore();
 db.collection("seusl").doc("1").onSnapshot(update=>{
     console.log(update.data());
 });
+
+
+
+
+///////////////////////////////////////////////////code//////////////////////////////////////////////////////////////
+
+const { QuerySnapshot } = require("@google-cloud/firestore");
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./serviceAccountKeys.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db=admin.firestore();
+let studentRef =db.collection("student")
+
+//reade db
+// studentRef.get().then((querySnapshot)=>{
+//     querySnapshot.forEach(document=>{
+//         console.log(document.data())
+//     })
+// })
+
+//insert data
+// const data= {id:3,name:"Savi",age:24,city:"Rathnapura",grade:"B"}
+// db.collection("student").doc(data.id.toString()).set(data)
+
+//update
+// const data= {id:3,name:"Kosala",age:22}
+// db.collection("student").doc(data.id.toString()).set(data) // ---- set eka dammama me ID eke thiyn data okkom nthi wela, dana data tikata update wenawa
+
+// const data= {id:3,name:"Saviiiii"}
+// db.collection("student").doc(data.id.toString()).update(data) // ----- update eka dammoth me ID eke update karan data eka witharay update wenne
+
+// db.collection("student").doc("2").onSnapshot(docSnapshot =>{
+//     console.log(docSnapshot.data().name);
+// })
+
+
+//delete
+// db.collection("student").doc("3").delete().then(res=>{
+//     console.log("document deleted")
+// })
+
+db.collection('student').doc("2").update({
+    ["age"]: admin.firestore.FieldValue.delete()
+  });
+
+// db.collection("student").doc("2").onSnapshot(docSnapshot =>{
+//     // console.log(docSnapshot.data().name);
+//     docSnapshot.data().name = "Laksahan";
+//     console.log(docSnapshot.data().name);
+// })
+
+// db.collection("student").doc(data.id.toString()).set(data)
